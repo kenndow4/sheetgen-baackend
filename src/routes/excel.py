@@ -52,3 +52,16 @@ def create_excel_from_prompt(body: PromptRequestDto):
         import traceback
         traceback.print_exc()
         raise HTTPException(status_code=500, detail=f"Internal error: {str(e)}")
+    
+
+@router.get("/download/{filename}")
+def download_excel(filename: str):
+    """
+    Descarga el archivo Excel generado.
+    """
+    file_path = FilePath(filename)
+    
+    if not file_path.exists():
+        raise HTTPException(status_code=404, detail="Archivo no encontrado")
+    
+    return FileResponse(path=file_path, filename=file_path.name, media_type="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet")

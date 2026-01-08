@@ -1,27 +1,39 @@
 from openpyxl import Workbook, load_workbook
 from openpyxl.styles import Font, PatternFill, Alignment
 from pathlib import Path
+import random
+import string
+import uuid
 
 from src.dto.excel import ExcelRequestDto
 
 
+file_name: list[str] = [
+    "ar",
+    "ig",
+    "ex",
+    "op",
+    "tx",
+    "df",
+    "in",
+    "st",
+    "md",
+    "rs"
+]
+
 def createExcelService(data: ExcelRequestDto):
-    file_path = Path(data.filename)
+    letters = "".join(random.choices(string.ascii_lowercase, k=3))
+    num = random.randint(1,1_0000_00)
+    uid = uuid.uuid4().hex[:6]
+    file_infinity_name = f"{random.choice(file_name)}{num}{letters}{uid}"
     
    
-    if file_path.exists():
-        print(f"Archivo existente encontrado: {data.filename}")
-        wb = load_workbook(data.filename)
-        ws = wb.active
-    else:
-        print(f"Creando nuevo archivo: {data.filename}")
-        wb = Workbook()
-        ws = wb.active
-        ws.append(data.columns)
+    print(f"Creando nuevo archivo: {file_infinity_name}.xlsx")
+    wb = Workbook()
+    ws = wb.active
+    ws.append(data.columns)
         
       
-        if data.header_style:
-            apply_row_style(ws, 1, data.header_style)
     
     if data.column_configs:
         for col_config in data.column_configs:
@@ -44,12 +56,12 @@ def createExcelService(data: ExcelRequestDto):
         if data.row_styles and str(idx) in data.row_styles:
             apply_row_style(ws, row_num, data.row_styles[str(idx)])
     
-    wb.save(data.filename)
-    print(f" Archivo guardado: {data.filename}")
+    wb.save(f"{file_infinity_name}.xlsx")
+    print(f" Archivo guardado: {file_infinity_name}.xlsx")
     
     # 🔥 Devolver data completa para preview
     return {
-        "filename": data.filename,
+        "filename": f"{file_infinity_name}.xlsx",
         "rows_added": len(data.rows),
         "columns": data.columns,
         "rows": data.rows,

@@ -2,7 +2,6 @@ from fastapi import FastAPI
 from src.routes.excel import router as excel_router
 from fastapi.middleware.cors import CORSMiddleware
 
-
 app = FastAPI(title="SheetGen")
 app.add_middleware(
     CORSMiddleware,
