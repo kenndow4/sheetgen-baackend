@@ -1,0 +1,27 @@
+# Python virtual environment
+venv/
+
+# Environment variables
+.env
+.env.*
+
+# Python cache
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Test / type checker cache
+.pytest_cache/
+.mypy_cache/
+.cache/
+
+# Build artifacts
+dist/
+build/
+
+# OS / Editor
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db

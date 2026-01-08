@@ -13,6 +13,10 @@ SheetGen is a Python backend application that allows users to generate Excel fil
 
 ---
 
+## environment variable
+
+GROQ_API_KEY
+
 ## 📦 Getting Started
 ```
 python -m venv venv
@@ -30,4 +34,9 @@ pip install -r requirements.txt
 ### Run app
 ```
 uvicorn src.main:app --reload
+```
+
+## Run with docker
+```
+docker run -p 8000:8000 --env-file .env name
 ```
