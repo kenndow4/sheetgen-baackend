@@ -1,8 +1,8 @@
 from fastapi import APIRouter, HTTPException
 from fastapi.responses import FileResponse
 from pathlib import Path as FilePath
-from dto.ia import PromptRequestDto
-from services.ia_services import generate_excel_structure
+from src.dto.ia import PromptRequestDto
+from src.services.ia_services import generate_excel_structure
 from src.dto.excel import ExcelRequestDto
 from src.services.excel_services import createExcelService
 
